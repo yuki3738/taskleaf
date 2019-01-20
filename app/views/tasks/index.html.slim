@@ -12,12 +12,12 @@ h1 タスク一覧
   .form-group
     = f.submit class: 'btn btn-outline-primary'
 
-
-= link_to '新規登録', new_task_path, class: 'btn btn-primary'
+= link_to '新規登録', new_task_path, class: 'btn btn-primary mb-3'
 
 .mb-3
   = paginate @tasks
   = page_entries_info @tasks
+
 table.table.table-hover
   thead.thead-default
     tr
@@ -27,7 +27,7 @@ table.table.table-hover
   tbody
     - @tasks.each do |task|
       tr
-        td= link_to task.name, task_path(task)
+        td= link_to task.name, task
         td= task.created_at
         td
           = link_to '編集', edit_task_path(task), class: 'btn btn-primary mr-3'
@@ -35,6 +35,6 @@ table.table.table-hover
 
 = link_to 'エクスポート', tasks_path(format: :csv), class: 'btn btn-primary mb-5'
 
-= form_tag import_tasks_path, multipat: true, class: 'mb-3' do
-    = file_field_tag :file
-    = submit_tag "インポート", class: 'btn btn-primary'
+= form_tag import_tasks_path, multipart: true, class: 'mb-5' do
+  = file_field_tag :file
+  = submit_tag "インポート", class: 'btn btn-primary'
